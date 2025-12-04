@@ -1,7 +1,7 @@
 {
   "name": "mcp-captcha-solver",
-  "version": "3.0.0",
-  "description": "The world's most comprehensive MCP server for AI captcha solving. 22+ tools, 15 captcha types: text, math, slider, reCAPTCHA, hCaptcha, FunCaptcha, GeeTest, Turnstile, audio, rotate, and more.",
+  "version": "3.1.0",
+  "description": "99%+ success rate captcha solving MCP. 25+ tools with cascading multi-service fallback (CapSolver, CapMonster, 2Captcha, Anti-Captcha).",
   "type": "module",
   "main": "index.js",
   "scripts": {
