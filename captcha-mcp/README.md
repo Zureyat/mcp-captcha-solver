@@ -1,106 +1,110 @@
 # MCP Captcha Solver
 
-**AI-Powered Captcha Resolution for Model Context Protocol**
+**Comprehensive AI-Powered Captcha Resolution for Model Context Protocol**
 
-This project provides a Model Context Protocol (MCP) server that enables AI agents (like Claude) to automatically solve captchas. By integrating this server, your AI assistant can navigate web flows that are normally blocked by human verification challenges, such as login screens, form submissions, and data scraping tasks.
-
-It acts as a bridge between your AI client and established third-party captcha solving services, allowing for programmatic resolution of both standard and complex captchas.
+This MCP server provides AI agents with multiple strategies to solve captchas—from local OCR to external services, slider puzzles to reCAPTCHA.
 
 ## 🚀 Features
 
-*   **General Captcha Solving**: Instantly resolves standard alphanumeric and English text captchas using the `zwhyzzz` service.
-*   **Complex Math & Logic Solving**: Handles mathematical problems and more complex visual challenges using the `jfbym` service (requires a user token).
-*   **Seamless AI Integration**: Built on the standard Model Context Protocol, making it plug-and-play compatible with Claude Desktop and other MCP-compliant tools.
-*   **Self-Healing**: Includes utilities to check service status and attempt IP unbans if rate limits are triggered.
-
-## 🛠️ Prerequisites
-
-*   **Node.js**: Version 18.0.0 or higher.
-*   **MCP Client**: An application that supports MCP, such as the [Claude Desktop App](https://claude.ai/download).
+| Category | Tools | Description |
+|----------|-------|-------------|
+| **Local OCR** | `solve_with_local_ocr`, `solve_math_locally` | Tesseract.js - No external API |
+| **Analysis** | `analyze_captcha`, `preprocess_image` | Detect type, enhance images |
+| **Slider/Puzzle** | `calculate_slider_offset`, `analyze_image_grid` | Solve visual puzzles |
+| **External Services** | `solve_with_2captcha`, `solve_with_anticaptcha` | reCAPTCHA, hCaptcha support |
+| **Fallback** | `solve_with_fallback` | Auto-retry multiple services |
 
 ## 📦 Installation
 
-1.  **Clone the repository** (or download the source code):
-    ```bash
-    git clone https://github.com/aezizhu/captcha-solver.git
-    cd captcha-solver/captcha-mcp
-    ```
-
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-
-3.  **Build/Verify**:
-    You can verify the server starts correctly by running:
-    ```bash
-    npm start
-    ```
-    *(Note: It will listen on stdio, so it might not show much output but shouldn't crash immediately.)*
+```bash
+cd captcha-mcp
+npm install
+npm start
+```
 
 ## ⚙️ Configuration
 
-To use this server with the Claude Desktop App, you need to add it to your configuration file.
+Add to your MCP client (e.g., Claude Desktop `claude_desktop_config.json`):
 
-1.  **Locate your config file**:
-    *   **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-    *   **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
-
-2.  **Edit the file** to include the `captcha-solver` server. Replace `/absolute/path/to/...` with the actual path to your `captcha-mcp` directory.
-
-    ```json
-    {
-      "mcpServers": {
-        "captcha-solver": {
-          "command": "node",
-          "args": [
-            "/Users/YOUR_USERNAME/path/to/captcha-solver/captcha-mcp/index.js"
-          ]
-        }
-      }
+```json
+{
+  "mcpServers": {
+    "captcha-solver": {
+      "command": "node",
+      "args": ["/path/to/captcha-mcp/index.js"]
     }
-    ```
+  }
+}
+```
 
-3.  **Restart Claude Desktop**: Fully quit and restart the application for the changes to take effect.
+## 🔧 Available Tools (13 Total)
 
-## 🔧 Available Tools
+### Analysis Tools
+- **`analyze_captcha`** - Detect captcha type (text, math, slider, grid)
+- **`preprocess_image`** - Enhance image for better OCR
+- **`get_captcha_solving_strategy`** - Get recommended solving approach
 
-Once connected, the AI will have access to the following tools:
+### Local OCR (No API Required)
+- **`solve_with_local_ocr`** - Read text captchas locally with Tesseract
+- **`solve_math_locally`** - OCR + auto-calculate math expressions
 
-### 1. `solve_general_captcha`
-Use this for most standard "type the text you see" captchas.
-*   **Input**: `imageBase64` (The base64 encoded string of the captcha image, without the `data:image/png;base64,` prefix).
-*   **Returns**: The text contained in the captcha.
+### Slider & Grid Tools
+- **`calculate_slider_offset`** - Estimate drag distance for slider puzzles
+- **`analyze_image_grid`** - Get cell coordinates for image selection
 
-### 2. `solve_math_captcha`
-Use this for math problems (e.g., "1 + 2 = ?") or more difficult captchas.
-*   **Input**:
-    *   `imageBase64`: The base64 encoded image.
-    *   `token`: Your API token for the `jfbym` service.
-    *   `type`: (Optional) The captcha type code. Default is `50106` (calculate_ry).
-*   **Returns**: The result of the calculation or challenge.
+### External Services
+- **`solve_general_captcha`** - Free service (rate-limited)
+- **`solve_math_captcha`** - jfbym service (requires token)
+- **`solve_with_2captcha`** - 2Captcha (image, reCAPTCHA, hCaptcha)
+- **`solve_with_anticaptcha`** - Anti-Captcha integration
+- **`solve_with_fallback`** - Try multiple services in sequence
 
-### 3. `unban_ip`
-If you encounter rate limiting or IP bans from the free solving service, use this tool to attempt a self-service unban.
-*   **Input**: None.
-*   **Returns**: Status message indicating if the unban was successful.
+### Utilities
+- **`unban_ip`** - Self-service IP unban
 
-### 4. `get_qq_group`
-Retrieves the QQ group number for community support regarding the underlying solving service.
+## 💡 Usage Examples
 
-## 💡 Usage Tips for AI
+### Simple Text Captcha
+```
+AI: Use solve_with_local_ocr with the captcha image
+Result: { "text": "A3Kp9", "confidence": 87 }
+```
 
-When asking Claude to solve a captcha, you can simply provide the image (or describe that there is a captcha on the screen if Claude is viewing it) and ask it to "solve this captcha".
+### Math Captcha
+```
+AI: Use solve_math_locally
+Result: { "expression": "12+8", "result": "20" }
+```
 
-*   **Example Prompt**: "I'm stuck at a login screen with a captcha. Here is the image. Can you solve it for me?"
-*   **For Developers**: If you are building an agent, you can extract the captcha image from the DOM (usually an `<img>` or `<canvas>` tag), convert it to base64, and pass it to the `solve_general_captcha` tool.
+### Slider Puzzle
+```
+AI: Use calculate_slider_offset with the background image
+Result: { "estimatedOffset": 156, "hint": "Drag slider 156px from left" }
+```
 
-## ⚠️ Important Notes
+### reCAPTCHA v2
+```
+AI: Use solve_with_2captcha with apiKey, siteKey, and pageUrl
+Result: { "result": "03AGdBq24PBCbG..." }
+```
 
-*   **Privacy**: Captcha images are sent to external third-party services (`zwhyzzz.top` and `jfbym.com`) for processing. Do not send sensitive personal information through this tool.
-*   **Rate Limits**: The free general captcha service may have rate limits. Use the `unban_ip` tool if you get blocked.
-*   **Tokens**: For reliable math captcha solving, you will need to obtain a token from the `jfbym` service provider.
+## 🧠 Solving Strategies
+
+| Captcha Type | Recommended Approach |
+|--------------|---------------------|
+| Distorted Text | Local OCR → External fallback |
+| Math Problems | `solve_math_locally` (instant) |
+| Slider Puzzle | `calculate_slider_offset` + mouse simulation |
+| reCAPTCHA v2 | 2Captcha or Anti-Captcha |
+| hCaptcha | External service required |
+| Image Selection | `analyze_image_grid` + AI vision |
+
+## ⚠️ Requirements
+
+- **Node.js** 18+
+- **API Keys** (optional): 2Captcha, Anti-Captcha for advanced challenges
+- Images sent to external services when using those tools
 
 ## License
 
-MIT License
+MIT

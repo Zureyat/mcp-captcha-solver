@@ -1,7 +1,7 @@
 {
   "name": "mcp-captcha-solver",
-  "version": "1.0.0",
-  "description": "An AI-powered Model Context Protocol (MCP) server for automated captcha solving. Integrates with external solving services to provide seamless captcha resolution for AI agents.",
+  "version": "2.0.0",
+  "description": "An AI-powered Model Context Protocol (MCP) server for automated captcha solving. Features local OCR, image analysis, slider solving, and multiple service integrations.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -16,14 +16,19 @@
     "automation",
     "llm",
     "agent",
-    "tampermonkey",
-    "node"
+    "ocr",
+    "tesseract",
+    "2captcha",
+    "anticaptcha",
+    "reCAPTCHA",
+    "hCaptcha"
   ],
   "author": "aezi",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.6.0",
-    "zod": "^3.23.8"
+    "tesseract.js": "^5.0.0",
+    "sharp": "^0.33.0"
   },
   "engines": {
     "node": ">=18.0.0"
